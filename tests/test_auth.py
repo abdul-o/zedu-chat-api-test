@@ -23,14 +23,14 @@ def test_login_success():
     print(response.status_code)
     print(data)
 
-    # ✅ Status check
+    #  Status check
     assert response.status_code == 200
 
-    # ✅ Correct JSON structure check
+    #  Correct JSON structure check
     assert "data" in data
     assert "access_token" in data["data"]
 
-    # ✅ Token validation
+    #  Token validation
     token = data["data"]["access_token"]
     assert isinstance(token, str)
     assert len(token) > 0

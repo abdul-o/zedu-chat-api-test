@@ -7,7 +7,7 @@ load_dotenv()
 BASE_URL = os.getenv("BASE_URL")
 
 
-# 1. Empty email and password
+#  Empty email and password
 def test_login_empty_fields():
     response = requests.post(
         f"{BASE_URL}/auth/login",
@@ -16,7 +16,7 @@ def test_login_empty_fields():
     assert response.status_code == 400
 
 
-# 2. Null values
+#  Null values
 def test_login_null_values():
     response = requests.post(
         f"{BASE_URL}/auth/login",
@@ -25,7 +25,7 @@ def test_login_null_values():
     assert response.status_code == 400
 
 
-# 3. Extremely long email
+#  Extremely long email
 def test_login_very_long_email():
     long_email = "a" * 200 + "@gmail.com"
     response = requests.post(
@@ -35,7 +35,7 @@ def test_login_very_long_email():
     assert response.status_code in [400, 401]
 
 
-# 4. Special characters input
+#  Special characters input
 def test_login_special_characters():
     response = requests.post(
         f"{BASE_URL}/auth/login",
@@ -44,7 +44,7 @@ def test_login_special_characters():
     assert response.status_code == 400
 
 
-# 5. Case sensitivity check
+#  Case sensitivity check
 def test_login_email_case_sensitivity():
     response = requests.post(
         f"{BASE_URL}/auth/login",
@@ -53,11 +53,11 @@ def test_login_email_case_sensitivity():
             "password": os.getenv("PASSWORD")
         }
     )
-    # Some systems allow this, some don't → accept both valid outcomes
+    # accept both valid outcomes
     assert response.status_code in [200, 400, 401]
 
 
-# 6. Repeated login attempts (rate/consistency)
+#  Repeated login attempts (rate/consistency)
 def test_multiple_login_requests():
     for _ in range(3):
         response = requests.post(
@@ -70,7 +70,7 @@ def test_multiple_login_requests():
         assert response.status_code == 200
 
 
-# 7. Missing password field
+#  Missing password field
 def test_login_missing_password():
     response = requests.post(
         f"{BASE_URL}/auth/login",
@@ -79,7 +79,7 @@ def test_login_missing_password():
     assert response.status_code == 400
 
 
-# 8. Missing email field
+#  Missing email field
 def test_login_missing_email():
     response = requests.post(
         f"{BASE_URL}/auth/login",

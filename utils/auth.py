@@ -10,7 +10,7 @@ PASSWORD = os.getenv("PASSWORD")
 
 
 def get_token():
-    # Validate environment variables early
+    # Validate environment variables
     assert BASE_URL is not None, "BASE_URL not set in .env"
     assert EMAIL is not None, "EMAIL not set in .env"
     assert PASSWORD is not None, "PASSWORD not set in .env"
@@ -26,7 +26,7 @@ def get_token():
         timeout=10
     )
 
-    # Debug info (helps during failures)
+    # Debug information
     print(f"LOGIN URL: {url}")
     print(f"STATUS: {response.status_code}")
     print(f"RESPONSE: {response.text}")

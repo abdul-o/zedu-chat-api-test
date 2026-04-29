@@ -36,10 +36,11 @@ pip install -r requirements.txt
 
 ### Setup Instruction
 
- - Clone the Repository
+ 1. Clone the Repository
 
-        git clone <your-repo-link>
-        cd zedu-api-tests
+    git clone <your-repo-link>
+    cd zedu-api-tests
+
 2. Create Environment File
 
 Create a .env file in the root directory (same level as README.md):
@@ -47,7 +48,7 @@ BASE_URL=https://api.staging.zedu.chat/api/v1
 EMAIL=your_registered_email
 PASSWORD=your_registered_password
 
-⚠️ Important:
+Important Note:
 
 Do NOT commit .env to GitHub
 Use a valid registered account
@@ -58,7 +59,8 @@ python -m venv venv
 source venv/bin/activate   # Linux/Mac
 venv\Scripts\activate      # Windows
 
-▶️ How to Run Tests
+
+##   How to Run Tests
 
 Run the full test suite:
 
@@ -73,7 +75,7 @@ Independent
 Repeatable
 Idempotent
 
-📁 Project Structure
+## Project Structure
 
 project/
 │
@@ -92,83 +94,83 @@ project/
 └── README.md
 
 
-🧪 Test Coverage Explanation
-🔐 test_auth.py
+## Test Coverage Explanation
+ - test_auth.py
 
-Covers authentication functionality:
+    #Covers authentication functionality:
 
-Successful login
-Response structure validation
-Token presence and type validation
-Token expiry validation
+       - Successful login
+       - Response structure validation
+       - Token presence and type validation
+       - Token expiry validation
 
-👤 test_users.py
+ - test_users.py
 
-Covers protected endpoints:
+    #Covers protected endpoints:
 
-Access with valid token
-Access without token (unauthorized)
-Access with invalid token
-Validation of returned user data structure
+       - Access with valid token
+       - Access without token (unauthorized)
+       - Access with invalid token
+       - Validation of returned user data structure
 
-❌ test_negative.py
+- test_negative.py
 
-Covers failure scenarios:
+    #Covers failure scenarios:
 
-Invalid login credentials
-Missing required fields
-Invalid email formats
-Unauthorized access attempts
-Malformed tokens
+       - Invalid login credentials
+       - Missing required fields
+       - Invalid email formats
+       - Unauthorized access attempts
+       - Malformed tokens
 
 These tests ensure the API handles incorrect inputs gracefully.
 
-⚠️ test_edge_cases.py
+- test_edge_cases.py
 
-Covers boundary and unusual inputs:
+    #Covers boundary and unusual inputs:
 
-Empty values
-Null values
-Extremely long inputs
-Special characters
-Case sensitivity checks
-Repeated requests
+       - Empty values
+       - Null values
+       - Extremely long inputs
+       - Special characters
+       - Case sensitivity checks
+       - Repeated requests
 
 These tests validate system stability under uncommon but realistic conditions.
 
-🔐 Authentication Handling
+- Authentication Handling
 
 Authentication is handled dynamically using a reusable function in:
 
-utils/auth.py
-Token is generated at runtime
-No hardcoded tokens
-Shared across tests using Pytest fixtures (conftest.py)
+       - utils/auth.py
+       - Token is generated at runtime
+       - No hardcoded tokens
+       - Shared across tests using Pytest fixtures (conftest.py)
 
-🧠 Key QA Practices Implemented
+##  Key QA Practices Implemented
 
 This project follows strong QA engineering principles:
 
-✅ No hardcoded credentials or tokens
-✅ Dynamic authentication handling
-✅ Independent and repeatable tests
-✅ Meaningful assertions (not just status codes)
-✅ Clear test naming and structure
-✅ Separation of concerns (utils vs tests)
+    No hardcoded credentials or tokens
+    Dynamic authentication handling
+    Independent and repeatable tests
+    Meaningful assertions (not just status codes)
+    Clear test naming and structure
+    Separation of concerns (utils vs tests)
 
-📊 Test Coverage Summary
-Total Tests: 26
-Positive Tests: ✅
-Negative Tests: ≥10 ✅
-Edge Cases: ≥5 ✅
+## Test Coverage Summary
+    Total Tests: 26
+    Positive Tests:
+    Negative Tests: ≥10
+    Edge Cases: ≥5
 
-📝 Blog Post
+## Blog Post
 
 A detailed explanation of my approach to this task can be found here:
 
 👉 [Insert your blog link here]
 
-✅ Final Notes
+## Final Notes
 
 This project is designed so that any engineer can:
 

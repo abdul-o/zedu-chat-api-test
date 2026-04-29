@@ -8,22 +8,41 @@ BASE_URL = os.getenv("BASE_URL")
 EMAIL = os.getenv("EMAIL")
 PASSWORD = os.getenv("PASSWORD")
 
+
 def get_token():
+    # Validate environment variables early
+    assert BASE_URL is not None, "BASE_URL not set in .env"
+    assert EMAIL is not None, "EMAIL not set in .env"
+    assert PASSWORD is not None, "PASSWORD not set in .env"
+
+    url = f"{BASE_URL}/auth/login"
+
     response = requests.post(
-        f"{BASE_URL}/auth/login",
+        url,
         json={
             "email": EMAIL,
             "password": PASSWORD
-        }
+        },
+        timeout=10
     )
 
-    assert response.status_code == 200, "Login failed"
+    # Debug info (helps during failures)
+    print(f"LOGIN URL: {url}")
+    print(f"STATUS: {response.status_code}")
+    print(f"RESPONSE: {response.text}")
+
+    # Validate response
+    assert response.status_code == 200, f"Login failed: {response.text}"
 
     data = response.json()
 
-    # IMPORTANT: handle possible response structure
-    token = data.get("token") or data.get("access_token")
+    # Validate structure
+    assert "data" in data, f"'data' key missing: {data}"
+    assert "access_token" in data["data"], f"'access_token' missing: {data}"
 
-    assert token is not None, "Token not found in response"
+    token = data["data"]["access_token"]
+
+    # Final validation
+    assert isinstance(token, str) and len(token) > 0, "Invalid token"
 
     return token

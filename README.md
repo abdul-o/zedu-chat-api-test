@@ -38,7 +38,7 @@ pip install -r requirements.txt
 
  1. Clone the Repository
 
-    git clone <your-repo-link>
+    git clone https://github.com/abdul-o/zedu-chat-api-test.git
     cd zedu-api-tests
 
 2. Create Environment File
@@ -168,7 +168,7 @@ This project follows strong QA engineering principles:
 
 A detailed explanation of my approach to this task can be found here:
 
-👉 [Insert your blog link here]
+👉 https://abdul-o.hashnode.dev/building-a-reliable-api-automation-suite-for-zedu-chat
 
 ## Final Notes
 

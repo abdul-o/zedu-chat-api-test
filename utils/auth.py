@@ -44,5 +44,5 @@ def get_token():
 
     # Final validation
     assert isinstance(token, str) and len(token) > 0, "Invalid token"
-
+    assert BASE_URL is not None, "BASE_URL is not set"
     return token

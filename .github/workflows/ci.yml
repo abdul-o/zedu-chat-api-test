@@ -30,8 +30,13 @@ jobs:
           echo "EMAIL=${{ secrets.EMAIL }}" >> .env
           echo "PASSWORD=${{ secrets.PASSWORD }}" >> .env
 
-      - name: Debug ENV
-        run: cat .env
+
+      - name: Debug ENV CONTENT
+        run: |
+            echo "----- ENV FILE -----"
+            cat .env
+            echo "--------------------"
+
 
       - name: Run tests
         run: pytest -s --junitxml=report.xml

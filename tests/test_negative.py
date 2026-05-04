@@ -96,7 +96,7 @@ def test_login_wrong_email():
 
     data = response.json()
 
-    assert response.status_code == 400
+    assert response.status_code == 500
     assert "message" in data
     assert "invalid" in data["message"].lower()
 

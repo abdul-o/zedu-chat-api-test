@@ -1,6 +1,8 @@
 import requests
 import os
 from dotenv import load_dotenv
+from jsonschema import validate
+from tests.schemas import login_schema
 
 load_dotenv()
 
@@ -12,48 +14,26 @@ PASSWORD = os.getenv("PASSWORD")
 def test_login_success():
     response = requests.post(
         f"{BASE_URL}/auth/login",
-        json={
-            "email": EMAIL,
-            "password": PASSWORD
-        }
+        json={"email": EMAIL, "password": PASSWORD}
     )
 
     data = response.json()
 
-    print(response.status_code)
-    print(data)
-
-    #  Status check
+    #  Status code
     assert response.status_code == 200
 
-    #  Correct JSON structure check
+    #  Field presence
     assert "data" in data
     assert "access_token" in data["data"]
 
-    #  Token validation
-    token = data["data"]["access_token"]
-    assert isinstance(token, str)
-    assert len(token) > 0
+    #  Data type
+    assert isinstance(data["data"]["access_token"], str)
 
-def test_login_response_structure():
-    response = requests.post(
-        f"{BASE_URL}/auth/login",
-        json={"email": EMAIL, "password": PASSWORD}
-    )
+    #  Field value
+    assert len(data["data"]["access_token"]) > 0
 
-    data = response.json()
-
-    assert "status" in data
-    assert "message" in data
+    # Message validation
     assert data["status"] == "success"
 
-
-def test_login_token_expiry_present():
-    response = requests.post(
-        f"{BASE_URL}/auth/login",
-        json={"email": EMAIL, "password": PASSWORD}
-    )
-
-    data = response.json()
-
-    assert "access_token_expires_in" in data["data"]
+    #  Schema validation
+    validate(instance=data, schema=login_schema)

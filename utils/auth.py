@@ -9,6 +9,11 @@ EMAIL = os.getenv("EMAIL")
 PASSWORD = os.getenv("PASSWORD")
 
 
+assert BASE_URL is not None, "BASE_URL is not set"
+assert EMAIL is not None, "EMAIL is not set"
+assert PASSWORD is not None, "PASSWORD is not set"
+
+
 def get_token():
     # Validate environment variables
     assert BASE_URL is not None, "BASE_URL not set in .env"
@@ -44,5 +49,5 @@ def get_token():
 
     # Final validation
     assert isinstance(token, str) and len(token) > 0, "Invalid token"
-    assert BASE_URL is not None, "BASE_URL is not set"
+
     return token

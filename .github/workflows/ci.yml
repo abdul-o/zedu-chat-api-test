@@ -22,14 +22,16 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Debug ENV
-        run: cat .env
+
 
       - name: Create .env file
         run: |
           echo "BASE_URL=${{ secrets.BASE_URL }}" > .env
           echo "EMAIL=${{ secrets.EMAIL }}" >> .env
           echo "PASSWORD=${{ secrets.PASSWORD }}" >> .env
+
+      - name: Debug ENV
+        run: cat .env
 
       - name: Run tests
         run: pytest -s --junitxml=report.xml

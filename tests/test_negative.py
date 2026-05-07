@@ -128,3 +128,42 @@ def test_invalid_token_format():
     assert "message" in data
 
     validate(instance=data, schema=error_schema)
+
+    # Password Reset Test
+
+def test_password_reset_request_valid_email():
+    response = requests.post(
+        f"{BASE_URL}/auth/password-reset",
+        json={"email": EMAIL}
+    )
+
+    data = response.json()
+
+    assert response.status_code in [200, 201]
+    assert "message" in data
+
+def test_password_reset_invalid_email():
+    response = requests.post(
+        f"{BASE_URL}/auth/password-reset",
+        json={"email": "invalidemail"}
+    )
+
+    data = response.json()
+
+    assert response.status_code == 422
+    validate(instance=data, schema=error_schema)
+
+def test_password_reset_empty_email():
+    response = requests.post(
+        f"{BASE_URL}/auth/password-reset",
+        json={"email": ""}
+    )
+
+    data = response.json()
+
+    assert response.status_code == 422
+    validate(instance=data, schema=error_schema)
+
+
+
+

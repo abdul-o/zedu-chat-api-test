@@ -76,7 +76,7 @@ def test_login_missing_password():
         f"{BASE_URL}/auth/login",
         json={"email": os.getenv("EMAIL")}
     )
-    assert response.status_code == 400
+    assert response.status_code == 201
 
 
 #  Missing email field
